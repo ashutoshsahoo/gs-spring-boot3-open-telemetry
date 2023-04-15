@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+	id 'idea'
+}
+
+group 'com.ashu.practice'
+version '1.0.0-SNAPSHOT'
+
+
+idea {
+	module {
+		downloadJavadoc = true
+		downloadSources = true
+	}
+}

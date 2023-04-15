@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: user-service
+  jpa:
+    open-in-view: false
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+
+management:
+  metrics:
+    enable:
+      all: true
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+        greeting:
+          call: true
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: "*"

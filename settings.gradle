@@ -1,0 +1,4 @@
+rootProject.name = 'gs-spring-boot3-open-telemetry'
+include 'common-lib'
+include 'user-service'
+include 'address-service'
