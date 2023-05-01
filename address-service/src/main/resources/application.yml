@@ -5,10 +5,14 @@ spring:
     name: address-service
   jpa:
     open-in-view: false
+  main:
+    banner-mode: "off"
 
 logging:
   pattern:
     level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+  level:
+    org.zalando.logbook: TRACE
 
 management:
   metrics:
@@ -29,3 +33,25 @@ management:
     web:
       exposure:
         include: "*"
+
+springdoc:
+  show-actuator: true
+
+
+logbook:
+  include:
+    - /api/**
+  exclude:
+    - /actuator/**
+  filter.enabled: true
+  format.style: http
+  minimum-status: 400
+  obfuscate:
+    headers:
+      - Authorization
+      - X-Secret
+    parameters:
+      - access_token
+      - password
+  write:
+    chunk-size: 1000

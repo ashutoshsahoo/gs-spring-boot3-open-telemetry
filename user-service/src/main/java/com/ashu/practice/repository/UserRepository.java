@@ -1,4 +1,4 @@
-package com.ashu.practice;
+package com.ashu.practice.repository;
 
 import com.ashu.practice.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

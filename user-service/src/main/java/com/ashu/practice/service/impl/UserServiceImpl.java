@@ -1,6 +1,7 @@
 package com.ashu.practice.service.impl;
 
-import com.ashu.practice.UserRepository;
+import com.ashu.practice.dto.UserPage;
+import com.ashu.practice.repository.UserRepository;
 import com.ashu.practice.dto.AddressDto;
 import com.ashu.practice.dto.UserDto;
 import com.ashu.practice.model.User;
@@ -22,11 +23,14 @@ import java.net.URI;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    public static final String API_URL_ADDRESS = "http://localhost:8085/api/v1/address/";
     private final UserRepository userRepository;
+    private final RestTemplate restTemplate;
 
     @Override
-    public Page<UserDto> viewAll(Pageable pageable) {
-        return userRepository.findAll(pageable).map(this::mapModelToDto);
+    public UserPage viewAll(Pageable pageable) {
+        log.info("Fetching all the users");
+        return convetToUserPage(userRepository.findAll(pageable).map(this::mapModelToDto));
     }
 
     @Override
@@ -55,10 +59,14 @@ public class UserServiceImpl implements UserService {
     }
 
     private AddressDto getAddressById(long id) {
-        var restTemplate = new RestTemplate();
-        var response = restTemplate.getForObject(URI.create("http://localhost:8085/api/v1/address/" + id), AddressDto.class);
+        log.info("Requesting address for user id={}", id);
+        var response = restTemplate.getForObject(URI.create(API_URL_ADDRESS + id), AddressDto.class);
         log.info("Response from Address service for id={} is {}", id, response);
         return response;
+    }
+
+    private UserPage convetToUserPage(Page<UserDto> dtoPage) {
+        return new UserPage(dtoPage.getContent(), dtoPage.getPageable(), dtoPage.getTotalPages());
     }
 
 }

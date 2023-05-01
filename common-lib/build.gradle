@@ -17,6 +17,7 @@ repositories {
 
 
 dependencies {
+    implementation 'io.swagger.core.v3:swagger-annotations:2.2.9'
     compileOnly 'org.projectlombok:lombok:1.18.26'
     annotationProcessor 'org.projectlombok:lombok:1.18.26'
 }

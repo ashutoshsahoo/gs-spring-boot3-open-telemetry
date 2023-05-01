@@ -14,6 +14,13 @@ docker compose up -d
 
 ## Run application
 
+* Address-Service
+```shell
+cd address-service
+gradle clean bootRun
+```
+
+* User-Service
 ```shell
 cd user-service
 gradle clean bootRun
@@ -25,6 +32,10 @@ gradle clean bootRun
 while true; do curl http://localhost:8080/api/v1/users ; sleep 1; done
 ```
 
+### Open API Documents
+- [Address-Service](http://localhost:8085/swagger-ui/index.html)
+- [User-Service](http://localhost:8080/swagger-ui/index.html)
+
 ## Cleanup
 
 ```shell
@@ -34,3 +45,5 @@ docker compose down
 
 ## Reference
 * [Reactive Observability in Spring Boot 3](https://tanzu.vmware.com/developer/guides/observability-reactive-spring-boot-3/)
+* [Open API Spring Docs](https://springdoc.org/v2/)
+* [Logbook: HTTP request and response logging](https://github.com/zalando/logbook#logbook-http-request-and-response-logging)
