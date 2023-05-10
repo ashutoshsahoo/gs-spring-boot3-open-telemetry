@@ -1,0 +1,44 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: open-api-aggregate
+  jpa:
+    open-in-view: false
+  main:
+    banner-mode: "off"
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+  level:
+    org.zalando.logbook: TRACE
+
+management:
+  metrics:
+    enable:
+      all: true
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+        greeting:
+          call: true
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+springdoc:
+  show-actuator: true
+  swagger-ui:
+    urls:
+      - name: address-service
+        url: http://localhost:8085/v3/api-docs
+      - name: user-service
+        url: http://localhost:8080/v3/api-docs

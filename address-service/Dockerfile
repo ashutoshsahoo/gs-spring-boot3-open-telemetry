@@ -8,7 +8,7 @@ FROM openjdk:17-slim
 ARG VERSION=latest
 LABEL version=${VERSION}
 LABEL maintainer="Ashutosh Sahoo"
-LABEL description="Address Service Application"
+LABEL description="Open API Documents Application"
 
 WORKDIR /usr/local/app
 RUN useradd --user-group --system --create-home --no-log-init app
