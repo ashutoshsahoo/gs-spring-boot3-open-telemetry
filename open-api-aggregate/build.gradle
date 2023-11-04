@@ -1,53 +1,37 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.0.5'
-	id 'io.spring.dependency-management' version '1.1.0'
-	id 'idea'
-	id 'com.palantir.docker' version '0.35.0'
+    id 'org.springframework.boot'
+    id 'com.palantir.docker'
 }
 
-sourceCompatibility = '17'
-
-
-repositories {
-	mavenCentral()
-}
-
-
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'io.micrometer:micrometer-tracing-bridge-brave'
-	implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
-	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
-	runtimeOnly 'com.github.loki4j:loki-logback-appender:1.4.0'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'io.micrometer:micrometer-tracing-bridge-brave'
+    implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
+    runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+    runtimeOnly 'com.github.loki4j:loki-logback-appender'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 
 jar {
-	enabled = false
+    enabled = false
 }
 
 docker {
-	dependsOn bootJar
-	name "ashutoshsahoo/${project.name}:latest"
-	buildArgs([JAR_FILE: "${project.name}.jar", VERSION: "${project.parent.version}"])
-	files bootJar
+    dependsOn bootJar
+    name "ashutoshsahoo/${project.name}:latest"
+    buildArgs([JAR_FILE: "${project.name}.jar", VERSION: "${project.parent.version}"])
+    files bootJar
 //    tag 'latest', "${project.parent.version}"
 //    noCache true
 }

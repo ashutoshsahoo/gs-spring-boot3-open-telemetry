@@ -1,3 +1,18 @@
+pluginManagement {
+    repositories {
+        maven { url 'https://repo.spring.io/milestone' }
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+    }
+}
+
+
 rootProject.name = 'gs-spring-boot3-open-telemetry'
 include 'common-lib'
 include 'user-service'
