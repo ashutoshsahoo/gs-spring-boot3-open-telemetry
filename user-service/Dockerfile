@@ -1,7 +1,7 @@
 FROM openjdk:17-slim AS builder
 WORKDIR /usr/local/temp
 ARG JAR_FILE=build/libs/*.jar
-ADD ${JAR_FILE} application.jar
+COPY ${JAR_FILE} application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
 
 FROM openjdk:17-slim

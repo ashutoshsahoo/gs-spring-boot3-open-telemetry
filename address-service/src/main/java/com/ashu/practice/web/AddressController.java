@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api/v1/address")
 @RequiredArgsConstructor
 @Slf4j
-@Tag(name = "address", description = "the address API")
+@Tag(name = "address", description = "Address API")
 public class AddressController {
 
     private final AddressService addressService;
