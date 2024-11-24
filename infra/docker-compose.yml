@@ -54,3 +54,16 @@ services:
         ports:
             - "3000:3000"
 
+    user-service:
+        image: ashutoshsahoo/user-service
+        environment:
+            - SPRING_PROFILES_ACTIVE=docker
+        ports:
+            - "8080:8080"
+
+    address-service:
+        image: ashutoshsahoo/address-service
+        environment:
+            - SPRING_PROFILES_ACTIVE=docker
+        ports:
+            - "8085:8085"

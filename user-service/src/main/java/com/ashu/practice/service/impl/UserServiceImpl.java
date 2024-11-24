@@ -9,6 +9,7 @@ import com.ashu.practice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -23,9 +24,11 @@ import java.net.URI;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    public static final String API_URL_ADDRESS = "http://localhost:8085/api/v1/address/";
     private final UserRepository userRepository;
     private final RestTemplate restTemplate;
+
+    @Value("${api.url.address:http://localhost:8085/api/v1/address/}")
+    private String apiUrlAddress;
 
     @Override
     public UserPage viewAll(Pageable pageable) {
@@ -60,7 +63,7 @@ public class UserServiceImpl implements UserService {
 
     private AddressDto getAddressById(long id) {
         log.info("Requesting address for user id={}", id);
-        var response = restTemplate.getForObject(URI.create(API_URL_ADDRESS + id), AddressDto.class);
+        var response = restTemplate.getForObject(URI.create(apiUrlAddress + id), AddressDto.class);
         log.info("Response from Address service for id={} is {}", id, response);
         return response;
     }

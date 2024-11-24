@@ -38,7 +38,7 @@ gradle clean bootRun
 ### Send some traffic to application
 
 ```shell
-while true; do curl http://localhost:8080/api/v1/users ; sleep 1; done
+while true; do curl -s -o /dev/null --show-error http://localhost:8080/api/v1/users; sleep 1; done
 ```
 
 ### Open API Documents

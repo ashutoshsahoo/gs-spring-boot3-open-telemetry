@@ -35,7 +35,7 @@ jar {
 docker {
     dependsOn bootJar
     name "ashutoshsahoo/${project.name}:latest"
-    buildArgs([JAR_FILE: "${project.name}.jar", VERSION: "${project.parent.version}"])
+    buildArgs([JAR_FILE: "${project.name}-${project.version}.jar", VERSION: "${project.parent.version}"])
     files bootJar
 //    tag 'latest', "${project.parent.version}"
 //    noCache true
